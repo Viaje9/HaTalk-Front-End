@@ -12,11 +12,10 @@ import 'normalize.css';
 import MenuComponent from './components/Menu.vue';
 
 Vue.component('menu-component', MenuComponent);
-
 Vue.use(VueAxios, axios);
 Vue.use(
   new VueSocketIO({
-    connection: 'http://localhost:8080/',
+    connection: process.env.VUE_APP_LOCAL_URL,
   }),
 );
 
