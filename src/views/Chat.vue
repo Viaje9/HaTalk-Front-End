@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import avatarImg from '../assets/images/avatar.svg';
+import avatarImg from '@/assets/images/avatar.svg';
 
 export default {
   data() {

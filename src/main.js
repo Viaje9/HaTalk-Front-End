@@ -3,7 +3,7 @@ import VueAxios from 'vue-axios';
 import VueSocketIO from 'vue-socket.io';
 import axios from './plugins/axios';
 import App from './App.vue';
-import './registerServiceWorker';
+// import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import 'normalize.css';

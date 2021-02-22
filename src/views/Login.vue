@@ -49,6 +49,8 @@ export default {
         .then(async (res) => {
           if (res.data.success) {
             await $store.dispatch('getUser');
+            this.$socket.close();
+            this.$socket.open();
             $router.push('/');
           } else {
             this.loginErr = true;
