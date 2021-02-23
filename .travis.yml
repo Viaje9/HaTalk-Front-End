@@ -11,4 +11,4 @@ deploy:
   github-token: $GITHUB_TOKEN
   local-dir: public
   repo: Viaje9/HaTalk
-  target_branch: main
+  target_branch: master
