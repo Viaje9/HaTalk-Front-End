@@ -5,3 +5,10 @@ install:
     - npm install
 script:
     - npm run build
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  local-dir: public
+  repo: Viaje9/HaTalk
+  target_branch: main
