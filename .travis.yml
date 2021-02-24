@@ -3,6 +3,9 @@ node_js:
   - "14"
 install:
     - npm install
+env:
+    - BASE_URL="/"
+    - VUE_APP_LOCAL_URL="https://ha-talk-api.herokuapp.com/"
 script:
     - npm run build
 deploy:
@@ -11,5 +14,4 @@ deploy:
   github-token: $GITHUB_TOKEN
   local-dir: dist
   repo: Viaje9/HaTalk
-  on:
-    branch: main
+  
