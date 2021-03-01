@@ -4,7 +4,7 @@ node_js:
 install:
   - npm install
 env:
-  - BASE_URL="/" VUE_APP_LOCAL_URL="https://ha-talk-api.herokuapp.com/"
+  - BASE_URL="/" VUE_APP_LOCAL_URL="https://viaje9.com/"
 script:
   - npm run build
 deploy:
