@@ -14,14 +14,49 @@
           </div>
           <div class="row">
             <router-link class="btn" to="/register"> 註冊 </router-link>
-            <button v-on:keyup.enter="submit" class="btn">登入</button>
+            <button v-on:keyup.enter="submit" class="btn">
+              <template v-if="loading">
+                <svg
+                  version="1.1"
+                  id="loader"
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  x="0px"
+                  y="0px"
+                  width="30px"
+                  height="30px"
+                  viewBox="0 0 50 50"
+                  style="enable-background:new 0 0 50 50;"
+                  xml:space="preserve"
+                >
+                  <path
+                    fill="#000"
+                    d="M25.251,6.461c-10.318,0-18.683,8.365-18.683,
+                    18.683h4.068c0-8.071,6.543-14.615,14.615-14.615V6.461z"
+                  >
+                    <animateTransform
+                      attributeType="xml"
+                      attributeName="transform"
+                      type="rotate"
+                      from="0 25 25"
+                      to="360 25 25"
+                      dur="0.6s"
+                      repeatCount="indefinite"
+                    />
+                  </path>
+                </svg>
+              </template>
+              <template v-if="!loading">
+                登入
+              </template>
+            </button>
           </div>
         </form>
         <div class="err" v-show="loginErr">登入失敗請輸入正確帳號密碼</div>
       </div>
       <div class="right">
         <h1>HaTalk</h1>
-        <span>Copyright © 2020 Viaje9 Design.</span>
+        <span>Copyright © 2021 Viaje9 Design.</span>
       </div>
     </div>
   </div>
@@ -34,6 +69,7 @@ export default {
       account: null,
       password: null,
       loginErr: false,
+      loading: false,
     };
   },
   methods: {
@@ -41,6 +77,7 @@ export default {
       const {
         axios, $store, $router, account, password,
       } = this;
+      this.loading = true;
       axios
         .post('/Login', {
           account,
@@ -55,6 +92,9 @@ export default {
           } else {
             this.loginErr = true;
           }
+        })
+        .finally(() => {
+          this.loading = false;
         });
     },
   },
@@ -191,6 +231,9 @@ export default {
           width: 100%;
           display: flex;
           justify-content: space-around;
+          .btn #loader path {
+            fill: #0094ff;
+          }
         }
 
         .loginErr {
@@ -228,7 +271,7 @@ export default {
 
     .left,
     .right {
-      box-shadow: 7px 7px 5px rgba(0, 0, 0, 50%);
+      box-shadow: 7px 7px 15px rgba(0, 0, 0, 50%);
     }
   }
 }
