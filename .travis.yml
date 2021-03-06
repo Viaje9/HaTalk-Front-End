@@ -15,4 +15,5 @@ deploy:
   repo: Viaje9/HaTalk
   on:
     branch: main
+  fqdn: hatalk.viaje9.com
   
