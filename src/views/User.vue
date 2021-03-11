@@ -1,6 +1,5 @@
 <template>
-  <div class="outer">
-    <menu-component></menu-component>
+  <v-main class="outer">
     <div class="container">
       <div class="content">
         <div class="top">
@@ -19,7 +18,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </v-main>
 </template>
 
 <script>

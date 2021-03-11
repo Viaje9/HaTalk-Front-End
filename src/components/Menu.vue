@@ -1,22 +1,46 @@
 <template>
-  <div class="outer">
-    <div class="head">
-      <h2>HaTalk</h2>
-      <div class="avatar">
+  <v-navigation-drawer dark :value="menuShow" app>
+    <v-sheet dark class="pa-4">
+      <v-avatar class="mb-4" size="64">
         <img :src="avatarImg" alt="" />
+      </v-avatar>
+      <div >{{ name }}</div>
+    </v-sheet>
+    <v-divider></v-divider>
+    <v-list>
+      <v-list-item link to="/User">
+        <v-list-item-icon>
+          <v-icon>mdi-account</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>更改暱稱</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item link to="/Search">
+        <v-list-item-icon>
+          <v-icon>mdi-account-multiple-plus</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>搜索好友</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item link to="/">
+        <v-list-item-icon>
+          <v-icon>mdi-account-multiple</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>好友名單</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
+    <template v-slot:append>
+      <div class="pa-2">
+        <v-btn block to="/Login">
+          登出
+        </v-btn>
       </div>
-      <div class="name">{{ name }}</div>
-    </div>
-    <div class="body">
-      <router-link class="btn" to="/User"></router-link>
-      <router-link class="btn" to="/Search"></router-link>
-      <router-link class="btn" to="/"></router-link>
-      <router-link class="btn" to="/login"></router-link>
-    </div>
-    <div class="footer">
-      <span>Copyright © 2021 Viaje9 Design.</span>
-    </div>
-  </div>
+    </template>
+  </v-navigation-drawer>
 </template>
 
 <script>
@@ -26,11 +50,15 @@ export default {
   data() {
     return {
       avatarImg,
+      drawer: true,
     };
   },
   computed: {
     name() {
       return this.$store.state.name;
+    },
+    menuShow() {
+      return this.$store.state.menu;
     },
   },
 };

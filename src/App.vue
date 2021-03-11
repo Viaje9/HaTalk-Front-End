@@ -1,14 +1,24 @@
 <template>
-  <div id="app">
+  <v-app>
+    <Menu />
     <router-view></router-view>
-  </div>
+    <BottomMenu />
+  </v-app>
 </template>
+<script>
+import Menu from '@/components/Menu.vue';
+import BottomMenu from '@/components/BottomMenu.vue';
+
+export default {
+  components: { Menu, BottomMenu },
+};
+</script>
 <style lang="scss">
 * {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
-  font-family: "Noto Sans TC";
+  font-family: 'Noto Sans TC';
   text-decoration: none;
 }
 #app {

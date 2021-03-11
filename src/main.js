@@ -1,12 +1,14 @@
 import Vue from 'vue';
 import VueAxios from 'vue-axios';
 import VueSocketIO from 'vue-socket.io';
+import vuetify from './plugins/vuetify';
 import axios from './plugins/axios';
 import App from './App.vue';
 // import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import 'normalize.css';
+import '@babel/polyfill';
 
 // 全域component
 import MenuComponent from './components/Menu.vue';
@@ -24,5 +26,6 @@ Vue.config.productionTip = false;
 new Vue({
   router,
   store,
+  vuetify,
   render: (h) => h(App),
 }).$mount('#app');

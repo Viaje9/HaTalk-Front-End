@@ -27,7 +27,10 @@ const routes = [
   {
     path: '/chat/:id',
     component: Chat,
-    meta: { requiresAuth: true },
+    meta: {
+      requiresAuth: true,
+      DisableBottomMenu: true,
+    },
   },
   {
     path: '/user',
@@ -54,6 +57,7 @@ router.beforeEach(async (to, from, next) => {
   const { auth } = store.state;
 
   if (toAuthPage) {
+    store.commit('setMenuDisplay', true);
     if (auth) {
       next();
     } else {
@@ -62,6 +66,7 @@ router.beforeEach(async (to, from, next) => {
       });
     }
   } else {
+    store.commit('setMenuDisplay', false);
     next();
   }
 });
