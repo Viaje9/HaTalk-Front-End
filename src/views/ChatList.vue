@@ -13,22 +13,6 @@
               >
                 <td>{{ item.name }}</td>
               </tr>
-              <tr
-                v-for="(item, index) in firends"
-                :key="index + 'a'"
-                link
-                @click="$router.push('/Chat/' + item.account)"
-              >
-                <td>{{ item.name }}</td>
-              </tr>
-              <tr
-                v-for="(item, index) in firends"
-                :key="index + 'b'"
-                link
-                @click="$router.push('/Chat/' + item.account)"
-              >
-                <td>{{ item.name }}</td>
-              </tr>
             </tbody>
           </template>
         </v-simple-table>
