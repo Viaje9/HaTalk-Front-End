@@ -2,7 +2,7 @@
   <v-main app>
     <v-app-bar dark>
       <v-app-bar-nav-icon @click="$router.push('/')">
-        <v-icon>mdi-chevron-left</v-icon>
+        <v-icon large>mdi-chevron-left</v-icon>
       </v-app-bar-nav-icon>
       <v-toolbar-title>{{ friend }}</v-toolbar-title>
     </v-app-bar>
@@ -85,7 +85,7 @@ export default {
 $color1: #0b2239;
 $color2: #ffffff;
 .content {
-  height: 100%;
+  height: calc(100vh - 64px);
   background-color: $color1;
   position: relative;
   .room {

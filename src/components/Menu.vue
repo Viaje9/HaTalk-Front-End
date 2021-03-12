@@ -1,43 +1,38 @@
 <template>
-  <v-navigation-drawer dark :value="menuShow" app>
+  <v-navigation-drawer v-if="!$vuetify.breakpoint.mobile" app dark :value="menuShow">
     <v-sheet dark class="pa-4">
       <v-avatar class="mb-4" size="64">
         <img :src="avatarImg" alt="" />
       </v-avatar>
-      <div >{{ name }}</div>
+      <div>{{ name }}</div>
     </v-sheet>
     <v-divider></v-divider>
     <v-list>
-      <v-list-item link to="/User">
-        <v-list-item-icon>
-          <v-icon>mdi-account</v-icon>
-        </v-list-item-icon>
-        <v-list-item-content>
-          <v-list-item-title>更改暱稱</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-      <v-list-item link to="/Search">
-        <v-list-item-icon>
-          <v-icon>mdi-account-multiple-plus</v-icon>
-        </v-list-item-icon>
-        <v-list-item-content>
-          <v-list-item-title>搜索好友</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
       <v-list-item link to="/">
         <v-list-item-icon>
           <v-icon>mdi-account-multiple</v-icon>
         </v-list-item-icon>
         <v-list-item-content>
-          <v-list-item-title>好友名單</v-list-item-title>
+          <v-list-item-title>聊天室</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+      <v-list-item link>
+        <v-list-item-icon>
+          <v-icon>mdi-cash-multiple</v-icon>
+        </v-list-item-icon>
+        <v-list-item-content>
+          <v-list-item-title>帳本</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
     </v-list>
     <template v-slot:append>
-      <div class="pa-2">
+      <div class="pa-2 ">
         <v-btn block to="/Login">
           登出
         </v-btn>
+      </div>
+      <div class="text-center pb-5">
+        <span class="white--text">Copyright © 2021 Viaje9 Design.</span>
       </div>
     </template>
   </v-navigation-drawer>

@@ -1,16 +1,12 @@
 <template>
-  <v-bottom-navigation app dark v-if="show">
-    <v-btn to="/User">
-      <span>更改暱稱</span>
-      <v-icon>mdi-account</v-icon>
-    </v-btn>
-    <v-btn to="/Search">
-      <span>搜索好友</span>
-      <v-icon>mdi-account-multiple-plus</v-icon>
-    </v-btn>
-    <v-btn to="/">
+  <v-bottom-navigation app dark v-if="show && $vuetify.breakpoint.mobile">
+    <v-btn icon to="/">
       <span>好友名單</span>
       <v-icon>mdi-account-multiple</v-icon>
+    </v-btn>
+    <v-btn icon>
+      <span>帳本</span>
+      <v-icon>mdi-cash-multiple</v-icon>
     </v-btn>
   </v-bottom-navigation>
 </template>
@@ -24,10 +20,7 @@ export default {
   },
   watch: {
     $route(to) {
-      this.show = true;
-      if (to.meta.DisableBottomMenu || !Object.values(to.meta).length) {
-        this.show = false;
-      }
+      this.show = !to.meta.DisableBottomMenu || !!Object.values(to.meta).length;
     },
   },
 };
