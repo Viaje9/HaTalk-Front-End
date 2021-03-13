@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 import store from '../store/index';
 import ChatList from '../views/ChatList.vue';
+import Ledger from '../views/Ledger.vue';
 import Chat from '../views/Chat.vue';
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
@@ -23,6 +24,11 @@ const routes = [
   {
     path: '/register',
     component: Register,
+  },
+  {
+    path: '/ledger',
+    component: Ledger,
+    meta: { requiresAuth: true },
   },
   {
     path: '/chat/:id',

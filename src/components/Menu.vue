@@ -16,7 +16,7 @@
           <v-list-item-title>聊天室</v-list-item-title>
         </v-list-item-content>
       </v-list-item>
-      <v-list-item link>
+      <v-list-item link to="/ledger">
         <v-list-item-icon>
           <v-icon>mdi-cash-multiple</v-icon>
         </v-list-item-icon>
@@ -25,7 +25,7 @@
         </v-list-item-content>
       </v-list-item>
     </v-list>
-    <template v-slot:append>
+    <template #append>
       <div class="pa-2 ">
         <v-btn block to="/Login">
           登出
