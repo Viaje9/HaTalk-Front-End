@@ -3,6 +3,7 @@ import VueAxios from 'vue-axios';
 import VueSocketIO from 'vue-socket.io';
 import vuetify from './plugins/vuetify';
 import axios from './plugins/axios';
+import dayjs from './plugins/dayjs';
 import App from './App.vue';
 // import './registerServiceWorker';
 import router from './router';
@@ -27,5 +28,6 @@ new Vue({
   router,
   store,
   vuetify,
+  dayjs,
   render: (h) => h(App),
 }).$mount('#app');

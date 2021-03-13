@@ -181,6 +181,9 @@ $color2: #ffffff;
       background-color: unset;
       font-size: 20px;
       color: $color2;
+      &:focus {
+        outline: unset;
+      }
     }
     .btn {
       margin: 0 2px 2px 0;
@@ -237,9 +240,6 @@ $color2: #ffffff;
         padding: 0 0 0 10%;
         font-size: 16px;
         font-weight: 100;
-        &:focus {
-          outline: unset;
-        }
       }
       .btn {
         width: 20%;

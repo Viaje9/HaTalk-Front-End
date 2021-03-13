@@ -6,7 +6,7 @@
           <v-icon large>mdi-calendar-month</v-icon>
         </v-btn>
         <v-spacer></v-spacer>
-        {{ selectDate }}
+        <span class="text-h5">{{ selectDate }}</span>
         <v-spacer></v-spacer>
         <v-btn icon>
           <v-icon large>mdi-plus</v-icon>
@@ -15,12 +15,12 @@
       <v-card-text>
         <v-card tile elevation="5">
           <v-card-title class="d-flex justify-space-around">
-            <span>TWD</span>
-            <span>123123</span>
+            <span class="text-h5">TWD</span>
+            <span class="text-h5">123123</span>
           </v-card-title>
           <v-divider></v-divider>
           <v-simple-table class="LedgerTable" fixed-header>
-            <template v-slot:default>
+            <template #default>
               <thead>
                 <tr>
                   <th class="text-center">
@@ -29,12 +29,16 @@
                   <th class="text-center">
                     金額
                   </th>
+                  <th class="text-center">
+                    備註
+                  </th>
                 </tr>
               </thead>
               <tbody class="LedgerTbody">
                 <tr v-for="i in 10" :key="i">
                   <td class="text-center">食物</td>
                   <td class="text-center">$90</td>
+                  <td class="text-center"></td>
                 </tr>
               </tbody>
             </template>
@@ -69,15 +73,18 @@ export default {
     return {
       dialogData: false,
       ledgerStatusIndex: 0,
-      selectDate: null,
+      selectDate: this.$dayjs().format('YYYY-MM-DD'),
     };
   },
 };
 </script>
 <style lang="scss">
 #Ledger {
-  --tbodyHeight: 400px;
-  @media screen and (min-height: 813px) {
+  --tbodyHeight: 300px;
+  @media (min-height: 570px) {
+    --tbodyHeight: 400px;
+  }
+  @media (min-height: 900px) {
     --tbodyHeight: 700px;
   }
   .LedgerTable {
