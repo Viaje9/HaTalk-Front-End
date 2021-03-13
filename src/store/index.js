@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
 import axios from '../plugins/axios';
+import ledger from './ledger';
 
 Vue.use(Vuex);
 
@@ -53,5 +54,7 @@ export default new Vuex.Store({
     },
     userData: (state) => !!state.account,
   },
-  modules: {},
+  modules: {
+    ledger,
+  },
 });

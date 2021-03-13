@@ -68,13 +68,47 @@
 </template>
 
 <script>
+// import { openDB } from 'idb';
+
 export default {
   data() {
     return {
       dialogData: false,
       ledgerStatusIndex: 0,
       selectDate: this.$dayjs().format('YYYY-MM-DD'),
+      dataBase: {
+        name: 'Ledger',
+        version: 1,
+        storeName: 'expense',
+      },
+      db: {},
     };
+  },
+  async created() {
+    // console.log(this.$store.state.ledger);
+    // const {
+    //   dataBase: { name, version },
+    //   upgrade,
+    // } = this;
+    // this.db = await openDB(name, version, { upgrade });
+  },
+  methods: {
+    upgrade(db) {
+      let objectStore;
+      if (!db.objectStoreNames.contains('expense')) {
+        objectStore = db.createObjectStore('expense', {
+          keyPath: 'id',
+          autoIncrement: true,
+        });
+        objectStore.createIndex('category', 'category', { unique: false });
+        objectStore.createIndex('price', 'price', { unique: false });
+        objectStore.createIndex('date', 'date', { unique: false });
+        objectStore.createIndex('remark', 'remark', { unique: false });
+        objectStore.createIndex('status', 'status', { unique: false });
+        objectStore.createIndex('createTime', 'createTime', { unique: false });
+        objectStore.createIndex('updateTime', 'updateTime', { unique: false });
+      }
+    },
   },
 };
 </script>
