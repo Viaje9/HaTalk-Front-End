@@ -16,7 +16,7 @@
         <v-card tile elevation="5">
           <v-card-title class="d-flex justify-space-around">
             <span class="text-h5">TWD</span>
-            <span class="text-h5">123123</span>
+            <span class="text-h5">{{ deviceSize }}</span>
           </v-card-title>
           <v-divider></v-divider>
           <v-simple-table class="LedgerTable" fixed-header>
@@ -83,6 +83,12 @@ export default {
       },
       db: {},
     };
+  },
+  computed: {
+    deviceSize() {
+      const { innerHeight, innerWidth } = window;
+      return `寬: ${innerWidth} 高:${innerHeight}`;
+    },
   },
   async created() {
     // console.log(this.$store.state.ledger);
