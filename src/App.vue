@@ -2,15 +2,13 @@
   <v-app>
     <Menu />
     <router-view></router-view>
-    <BottomMenu />
   </v-app>
 </template>
 <script>
 import Menu from '@/components/Menu.vue';
-import BottomMenu from '@/components/BottomMenu.vue';
 
 export default {
-  components: { Menu, BottomMenu },
+  components: { Menu },
 };
 </script>
 <style lang="scss">

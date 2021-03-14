@@ -9,6 +9,9 @@
         <v-btn icon to="/User">
           <v-icon>mdi-cog</v-icon>
         </v-btn>
+        <v-btn icon to="/login">
+          <v-icon>mdi-cog</v-icon>
+        </v-btn>
       </v-app-bar>
       <v-simple-table>
         <template v-slot:default>
@@ -25,13 +28,16 @@
         </template>
       </v-simple-table>
     </v-card>
+    <BottomMenu />
   </v-main>
 </template>
 
 <script>
+import BottomMenu from '@/components/BottomMenu.vue';
 import avatarImg from '@/assets/images/avatar.svg';
 
 export default {
+  components: { BottomMenu },
   data() {
     return {
       avatarImg,
