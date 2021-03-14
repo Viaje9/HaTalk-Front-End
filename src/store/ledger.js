@@ -12,6 +12,7 @@ export default {
       storeName: 'expense',
     },
     db: {},
+    data: [],
   },
   mutations: {
     changeStatus(state, data) {
@@ -43,6 +44,10 @@ export default {
         }
       }
       state.db = await openDB(name, version, { upgrade });
+    },
+    async updateData({ state }) {
+      const { db, dataBase: { storeName } } = state;
+      state.data = await db.getAll(storeName);
     },
   },
 };

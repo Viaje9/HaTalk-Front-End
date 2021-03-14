@@ -14,7 +14,7 @@
     <v-card id="LedgerCotent" dark tile elevation="0">
       <div class="d-flex justify-space-around align-center">
         <span class="text-h4">TWD</span>
-        <span class="text-h4">{{ price }}</span>
+        <span class="text-h4">{{ todayTotal }}</span>
       </div>
       <v-divider></v-divider>
       <v-simple-table class="LedgerTable" fixed-header>
@@ -33,10 +33,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="i in 20" :key="i">
-              <td class="text-center">食物</td>
-              <td class="text-center">90</td>
-              <td class="text-center">185156</td>
+            <tr v-for="(item, index) in thisDateData" :key="index">
+              <td class="text-center">{{ item.category }}</td>
+              <td class="text-center">{{ item.price }}</td>
+              <td class="text-center">{{ item.remark }}</td>
             </tr>
           </tbody>
         </template>
@@ -98,9 +98,7 @@ export default {
   components: { BottomMenu },
   data() {
     return {
-      price: 0,
       dialogData: false,
-      ledgerStatusIndex: 0,
     };
   },
   computed: {
@@ -109,10 +107,27 @@ export default {
       status: (state) => state.status,
       dataBase: (state) => state.dataBase,
       db: (state) => state.db,
+      data: (state) => state.data,
     }),
+    thisDateData() {
+      const {
+        status, data, date, $dayjs,
+      } = this;
+      const today = $dayjs(date).format('YYYY-MM-DD');
+      return data.filter((e) => {
+        const thisDate = $dayjs(today).isSame($dayjs(e.date));
+        return thisDate && e.status === status;
+      });
+    },
+    todayTotal() {
+      return this.thisDateData.reduce((acc, curr) => {
+        const total = acc + Number(curr.price);
+        return total;
+      }, 0);
+    },
   },
   created() {
-    this.$store.dispatch('ledger/openDB');
+    this.$store.dispatch('ledger/updateData');
   },
   methods: {
     changeStatus(data) {

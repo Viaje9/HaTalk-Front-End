@@ -9,6 +9,9 @@ import Menu from '@/components/Menu.vue';
 
 export default {
   components: { Menu },
+  created() {
+    this.$store.dispatch('ledger/openDB');
+  },
 };
 </script>
 <style lang="scss">

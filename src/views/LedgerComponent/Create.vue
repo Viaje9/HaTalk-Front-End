@@ -8,7 +8,7 @@
         <v-spacer></v-spacer>
         <span class="text-h5">{{ statusTitle }}</span>
         <v-spacer></v-spacer>
-        <v-btn tile>
+        <v-btn tile @click="addItem">
           儲存
         </v-btn>
       </v-app-bar>
@@ -19,12 +19,30 @@
       <v-divider></v-divider>
       <v-carousel v-model="carouselIndex" hide-delimiters next-icon prev-icon height="400px">
         <v-carousel-item v-for="i in 10" :key="i">
-          <v-btn-toggle v-model="category" tile>
+          <v-btn-toggle mandatory v-model="category" tile>
             <v-container class="pa-2">
               <v-row class="pa-0">
                 <v-col col="12" class="text-center">
                   <v-btn value="早餐" class="ma-1">
                     早餐
+                  </v-btn>
+                  <v-btn value="午餐" class="ma-1">
+                    午餐
+                  </v-btn>
+                  <v-btn value="晚餐" class="ma-1">
+                    晚餐
+                  </v-btn>
+                  <v-btn value="消夜" class="ma-1">
+                    消夜
+                  </v-btn>
+                  <v-btn value="飲料" class="ma-1">
+                    飲料
+                  </v-btn>
+                  <v-btn value="日常用品" class="ma-1">
+                    日常用品
+                  </v-btn>
+                  <v-btn value="其他" class="ma-1">
+                    其他
                   </v-btn>
                 </v-col>
               </v-row>
@@ -71,9 +89,6 @@ export default {
       return status.get(this.status);
     },
   },
-  created() {
-    this.$store.dispatch('ledger/openDB');
-  },
   methods: {
     updatePirce(price) {
       this.price = price;
@@ -96,6 +111,7 @@ export default {
           updateTime,
         };
         await db.add('expense', item);
+        this.$store.dispatch('ledger/updateData');
         this.price = '0';
         this.remark = '';
         this.$router.push('/ledger');
