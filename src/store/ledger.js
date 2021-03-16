@@ -8,11 +8,13 @@ export default {
     date: dayjs().format('YYYY-MM-DD'),
     dataBase: {
       name: 'Ledger',
-      version: 1,
-      storeName: 'expense',
+      version: 2,
+      expenseStore: 'expense',
+      categoryStore: 'category',
     },
     db: {},
-    data: [],
+    itemList: [],
+    categoryList: [],
   },
   mutations: {
     changeStatus(state, data) {
@@ -42,12 +44,25 @@ export default {
           objectStore.createIndex('createTime', 'createTime', { unique: false });
           objectStore.createIndex('updateTime', 'updateTime', { unique: false });
         }
+
+        if (!db.objectStoreNames.contains('category')) {
+          objectStore = db.createObjectStore('category', {
+            keyPath: 'id',
+            autoIncrement: true,
+          });
+          objectStore.createIndex('name', 'name', { unique: true });
+          objectStore.createIndex('status', 'status', { unique: false });
+        }
       }
       state.db = await openDB(name, version, { upgrade });
     },
-    async updateData({ state }) {
-      const { db, dataBase: { storeName } } = state;
-      state.data = await db.getAll(storeName);
+    async updateItemList({ state }) {
+      const { db, dataBase: { expenseStore } } = state;
+      state.itemList = await db.getAll(expenseStore);
+    },
+    async updateCategoryList({ state }) {
+      const { db, dataBase: { categoryStore } } = state;
+      state.categoryList = await db.getAll(categoryStore);
     },
   },
 };

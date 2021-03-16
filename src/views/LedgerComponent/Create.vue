@@ -2,7 +2,7 @@
   <v-main app id="LedgerCreate">
     <v-card dark tile height="100%">
       <v-app-bar dark flat>
-        <v-btn icon to="/ledger">
+        <v-btn icon replace to="/ledger">
           <v-icon large>mdi-chevron-left</v-icon>
         </v-btn>
         <v-spacer></v-spacer>
@@ -18,31 +18,19 @@
       </div>
       <v-divider></v-divider>
       <v-carousel v-model="carouselIndex" hide-delimiters next-icon prev-icon height="400px">
-        <v-carousel-item v-for="i in 10" :key="i">
+        <v-carousel-item v-for="(carouse ,i) in thisCategoryList" :key="i">
           <v-btn-toggle mandatory v-model="category" tile>
             <v-container class="pa-2">
               <v-row class="pa-0">
                 <v-col col="12" class="text-center">
-                  <v-btn value="早餐" class="ma-1">
-                    早餐
-                  </v-btn>
-                  <v-btn value="午餐" class="ma-1">
-                    午餐
-                  </v-btn>
-                  <v-btn value="晚餐" class="ma-1">
-                    晚餐
-                  </v-btn>
-                  <v-btn value="消夜" class="ma-1">
-                    消夜
-                  </v-btn>
-                  <v-btn value="飲料" class="ma-1">
-                    飲料
-                  </v-btn>
-                  <v-btn value="日常用品" class="ma-1">
-                    日常用品
-                  </v-btn>
-                  <v-btn value="其他" class="ma-1">
-                    其他
+                  <v-btn
+                    v-for="(item,index) in carouse"
+                    :value="item.name"
+                    :key="index"
+                    class="ma-1"
+                    @click="openComputer = true"
+                  >
+                    {{ item.name }}
                   </v-btn>
                 </v-col>
               </v-row>
@@ -71,15 +59,15 @@ export default {
       remark: '',
       carouselIndex: 0,
       openComputer: false,
-      category: '早餐',
+      category: '',
     };
   },
   computed: {
     ...mapState('ledger', {
       date: (state) => state.date,
       status: (state) => state.status,
-      dataBase: (state) => state.dataBase,
       db: (state) => state.db,
+      categoryList: (state) => state.categoryList,
     }),
     statusTitle() {
       const status = new Map([
@@ -88,6 +76,21 @@ export default {
       ]);
       return status.get(this.status);
     },
+    thisCategoryList() {
+      const { status, categoryList } = this;
+      return categoryList
+        .filter((e) => e.status === status).reduce((acc, curr, i) => {
+          const index = parseInt(i / 20, 10);
+          if (!acc[index]) {
+            acc[index] = [];
+          }
+          acc[index].push(curr);
+          return acc;
+        }, []);
+    },
+  },
+  created() {
+    this.$store.dispatch('ledger/updateCategoryList');
   },
   methods: {
     updatePirce(price) {
@@ -111,10 +114,10 @@ export default {
           updateTime,
         };
         await db.add('expense', item);
-        this.$store.dispatch('ledger/updateData');
+        this.$store.dispatch('ledger/updateItemList');
         this.price = '0';
         this.remark = '';
-        this.$router.push('/ledger');
+        this.$router.replace('/ledger');
       }
     },
   },

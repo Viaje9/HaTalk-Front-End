@@ -4,6 +4,8 @@ import store from '../store/index';
 import ChatList from '../views/ChatList.vue';
 import Ledger from '../views/Ledger.vue';
 import LedgerCreate from '../views/LedgerComponent/Create.vue';
+import LedgerSetting from '../views/LedgerComponent/Setting.vue';
+import LedgerSettingCategory from '../views/LedgerComponent/Setting/Category.vue';
 import Chat from '../views/Chat.vue';
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
@@ -34,6 +36,16 @@ const routes = [
   {
     path: '/ledger/create',
     component: LedgerCreate,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/ledger/setting',
+    component: LedgerSetting,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: '/ledger/setting/category',
+    component: LedgerSettingCategory,
     meta: { requiresAuth: true },
   },
   {

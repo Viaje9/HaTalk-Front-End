@@ -7,7 +7,7 @@
       <v-spacer></v-spacer>
       <span class="text-h5">{{ date }}</span>
       <v-spacer></v-spacer>
-      <v-btn icon to="/ledger/create">
+      <v-btn icon replace to="/ledger/create">
         <v-icon large>mdi-plus</v-icon>
       </v-btn>
     </v-app-bar>
@@ -68,7 +68,15 @@
       <v-btn dark color="grey darken-2" elevation="0" class="LedgerBtn" tile>
         統計
       </v-btn>
-      <v-btn dark color="grey darken-2" elevation="0" class="LedgerBtn" tile>
+      <v-btn
+        dark
+        color="grey darken-2"
+        elevation="0"
+        class="LedgerBtn"
+        tile
+        replace
+        to="/ledger/setting"
+      >
         設定
       </v-btn>
     </div>
@@ -105,9 +113,7 @@ export default {
     ...mapState('ledger', {
       date: (state) => state.date,
       status: (state) => state.status,
-      dataBase: (state) => state.dataBase,
-      db: (state) => state.db,
-      data: (state) => state.data,
+      data: (state) => state.itemList,
     }),
     thisDateData() {
       const {
@@ -127,7 +133,7 @@ export default {
     },
   },
   created() {
-    this.$store.dispatch('ledger/updateData');
+    this.$store.dispatch('ledger/updateItemList');
   },
   methods: {
     changeStatus(data) {
