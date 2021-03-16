@@ -48,7 +48,7 @@
       <v-spacer></v-spacer>
       類別已重複
       <v-spacer></v-spacer>
-      <v-icon color="red darken-4">mdi-alert</v-icon>
+      <v-icon color="red lighten-1">mdi-alert</v-icon>
     </v-snackbar>
   </v-main>
 </template>
@@ -88,11 +88,13 @@ export default {
         name: category,
         status,
       };
-      await db.add('category', item).catch(() => {
-        vm.categoryRepeat = true;
-      });
-      // this.category = '';
-      this.$store.dispatch('ledger/updateCategoryList');
+      if (item.name) {
+        await db.add('category', item).catch(() => {
+          vm.categoryRepeat = true;
+        });
+        this.category = '';
+        this.$store.dispatch('ledger/updateCategoryList');
+      }
     },
     async deleteCategory(id) {
       const { db } = this;

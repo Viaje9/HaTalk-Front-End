@@ -1,7 +1,6 @@
 <template>
-  <v-main class="scroll" app>
-    <v-card dark tile>
-      <v-app-bar>
+  <v-main app>
+    <v-app-bar app dark>
         <v-spacer></v-spacer>
         <v-btn icon to="/Search">
           <v-icon>mdi-account-multiple-plus</v-icon>
@@ -13,8 +12,9 @@
           <v-icon>mdi-cog</v-icon>
         </v-btn>
       </v-app-bar>
-      <v-simple-table>
-        <template v-slot:default>
+    <v-card dark tile height="100%">
+      <v-simple-table dark class="scroll">
+        <template #default>
           <tbody>
             <tr
               v-for="(item, index) in firends"
@@ -25,6 +25,7 @@
               <td>{{ item.name }}</td>
             </tr>
           </tbody>
+          <v-divider></v-divider>
         </template>
       </v-simple-table>
     </v-card>
@@ -56,12 +57,12 @@ export default {
 
 <style lang="scss" scoped>
 .scroll {
-  max-height: 100vh;
+  height: calc(100vh - 64px);
   overflow-y: auto;
 }
 @media (max-width: 960px) {
   .scroll {
-    max-height: calc(100vh - 64px);
+    height: calc(100vh - 128px);
   }
 }
 </style>
