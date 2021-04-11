@@ -1,17 +1,17 @@
 <template>
   <v-main app>
     <v-app-bar app dark>
-        <v-spacer></v-spacer>
-        <v-btn icon to="/Search">
-          <v-icon>mdi-account-multiple-plus</v-icon>
-        </v-btn>
-        <v-btn icon to="/User">
-          <v-icon>mdi-cog</v-icon>
-        </v-btn>
-        <v-btn icon to="/login">
-          <v-icon>mdi-cog</v-icon>
-        </v-btn>
-      </v-app-bar>
+      <v-spacer></v-spacer>
+      <v-btn icon to="/Search">
+        <v-icon>mdi-account-multiple-plus</v-icon>
+      </v-btn>
+      <v-btn icon to="/User">
+        <v-icon>mdi-cog</v-icon>
+      </v-btn>
+      <v-btn icon @click="logout">
+        <v-icon>mdi-cog</v-icon>
+      </v-btn>
+    </v-app-bar>
     <v-card dark tile height="100%">
       <v-simple-table dark class="scroll">
         <template #default>
@@ -51,6 +51,16 @@ export default {
   },
   created() {
     this.$store.dispatch('getUser');
+  },
+  methods: {
+    logout() {
+      const { axios, $router } = this;
+      axios.get('/Logout').then(({ data }) => {
+        if (data.success) {
+          $router.push('/Login');
+        }
+      });
+    },
   },
 };
 </script>

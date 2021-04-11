@@ -105,7 +105,7 @@ $color2: #ffffff;
     overflow-y: scroll;
     padding: 10px;
     box-sizing: border-box;
-    height: calc(100% - 120px);
+    height: calc(100% - 70px);
     border-radius: 15px;
     border: 1px solid $color2;
     color: $color2;
@@ -204,7 +204,6 @@ $color2: #ffffff;
     width: 100%;
     height: calc(100vh - 56px);
     #text_area {
-      height: calc(100% - 70px);
       padding: 10px;
       margin: 10px;
       font-size: 13px;

@@ -99,7 +99,7 @@ export default {
           })
           .then((res) => {
             if (res.data.success) {
-              this.$store.commit('setUser', 'register');
+              this.$router.push('/');
             } else {
               this.errorRegister = '註冊失敗';
             }

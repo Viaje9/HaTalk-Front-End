@@ -80,7 +80,7 @@
         設定
       </v-btn>
     </div>
-    <v-bottom-sheet v-model="dialogData">
+    <v-bottom-sheet v-model="dialogData" width="384px">
       <v-date-picker
         @change="changeDate"
         :value="date"
