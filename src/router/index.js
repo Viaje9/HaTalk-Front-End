@@ -10,7 +10,6 @@ import Chat from '../views/Chat.vue';
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
 import User from '../views/User.vue';
-import Search from '../views/Search.vue';
 
 Vue.use(VueRouter);
 
@@ -59,11 +58,6 @@ const routes = [
   {
     path: '/user',
     component: User,
-    meta: { requiresAuth: true },
-  },
-  {
-    path: '/search',
-    component: Search,
     meta: { requiresAuth: true },
   },
 ];
