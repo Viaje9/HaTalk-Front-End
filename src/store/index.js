@@ -11,7 +11,6 @@ export default new Vuex.Store({
     account: null,
     friends: [],
     auth: false,
-    menu: true,
   },
   mutations: {
     setUser(state, data) {
@@ -23,8 +22,8 @@ export default new Vuex.Store({
     updateUserName(state, data) {
       state.name = data;
     },
-    setMenuDisplay(state, data) {
-      state.menu = data;
+    clearAuth(state) {
+      state.auth = false;
     },
   },
   actions: {
@@ -43,9 +42,6 @@ export default new Vuex.Store({
         }
       });
     },
-    // updateUserName(state, data) {
-    //   state.name = data;
-    // },
   },
   getters: {
     getFriendName: (state) => (account) => {

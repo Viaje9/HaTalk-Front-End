@@ -5,14 +5,14 @@
         搜索好友
       </v-card-title>
       <v-card-text>
-        <v-text-field v-model="account" label="請輸入帳號" required></v-text-field>
+        <v-text-field v-model="account" :error="notFind" label="請輸入帳號" required></v-text-field>
       </v-card-text>
       <v-card-actions>
-        <v-btn text :loading="searchLoading" color="teal accent-4" @click="search">
+        <v-btn :loading="searchLoading" text color="teal accent-4" @click="search">
           搜索
         </v-btn>
         <v-spacer></v-spacer>
-        <v-btn text color="teal accent-4" @click="close">
+        <v-btn color="red darken-1" @click="close">
           取消
         </v-btn>
       </v-card-actions>
@@ -31,12 +31,12 @@
               <h3 class="teal--text text--accent-4">長得帥也不能跟自己聊天！</h3>
             </template>
             <template v-else-if="hasFriend">
-              <v-btn text color="teal accent-4" :to="'/Chat/' + user.account">
+              <v-btn color="teal accent-4" text :to="'/Chat/' + user.account">
                 開始聊天
               </v-btn>
             </template>
             <template v-else>
-              <v-btn text :loading="addLoading" color="teal accent-4" @click="addFriend">
+              <v-btn :loading="addLoading" color="teal darken-2" @click="addFriend">
                 加入好友
               </v-btn>
             </template>

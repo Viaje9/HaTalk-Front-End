@@ -1,11 +1,12 @@
 <template>
   <v-main app>
+    <Menu />
     <v-app-bar app dark>
       <v-spacer></v-spacer>
       <v-btn icon @click="searchDialog = true">
         <v-icon>mdi-account-multiple-plus</v-icon>
       </v-btn>
-      <v-btn icon>
+      <v-btn icon @click="settingDialog = true">
         <v-icon>mdi-cog</v-icon>
       </v-btn>
       <v-btn icon @click="logoutDialog = true">
@@ -33,6 +34,9 @@
     <v-row justify="center">
       <SearchFriend :dialog="searchDialog" @close="searchDialog = false" />
     </v-row>
+    <v-row justify="center">
+      <UserSetting :dialog="settingDialog" @close="settingDialog = false" />
+    </v-row>
     <v-dialog v-model="logoutDialog" max-width="290">
       <v-card dark>
         <v-card-title class="headline">
@@ -40,12 +44,11 @@
         </v-card-title>
         <v-card-actions>
           <v-spacer></v-spacer>
-
-          <v-btn color="green darken-1" text @click="logoutDialog = false">
-            取消
-          </v-btn>
           <v-btn color="green darken-1" text @click="logout">
             確定
+          </v-btn>
+          <v-btn color="red darken-1" @click="logoutDialog = false">
+            取消
           </v-btn>
         </v-card-actions>
       </v-card>
@@ -54,17 +57,22 @@
 </template>
 
 <script>
+import Menu from '@/components/Menu.vue';
 import BottomMenu from '@/components/BottomMenu.vue';
 import SearchFriend from '@/components/SearchFriend.vue';
+import UserSetting from '@/components/UserSetting.vue';
 import avatarImg from '@/assets/images/avatar.svg';
 
 export default {
-  components: { BottomMenu, SearchFriend },
+  components: {
+    Menu, BottomMenu, SearchFriend, UserSetting,
+  },
   data() {
     return {
       avatarImg,
       logoutDialog: false,
       searchDialog: false,
+      settingDialog: false,
     };
   },
   computed: {
@@ -77,9 +85,10 @@ export default {
   },
   methods: {
     logout() {
-      const { axios, $router } = this;
+      const { axios, $router, $store } = this;
       axios.get('/Logout').then(({ data }) => {
         if (data.success) {
+          $store.commit('clearAuth');
           $router.push('/Login');
         }
       });

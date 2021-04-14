@@ -9,7 +9,6 @@ import LedgerSettingCategory from '../views/LedgerComponent/Setting/Category.vue
 import Chat from '../views/Chat.vue';
 import Login from '../views/Login.vue';
 import Register from '../views/Register.vue';
-import User from '../views/User.vue';
 
 Vue.use(VueRouter);
 
@@ -55,11 +54,6 @@ const routes = [
       DisableBottomMenu: true,
     },
   },
-  {
-    path: '/user',
-    component: User,
-    meta: { requiresAuth: true },
-  },
 ];
 
 const router = new VueRouter({
@@ -75,7 +69,6 @@ router.beforeEach(async (to, from, next) => {
   const { auth } = store.state;
 
   if (toAuthPage) {
-    store.commit('setMenuDisplay', true);
     if (auth) {
       next();
     } else {
@@ -84,7 +77,6 @@ router.beforeEach(async (to, from, next) => {
       });
     }
   } else {
-    store.commit('setMenuDisplay', false);
     next();
   }
 });

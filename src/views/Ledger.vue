@@ -1,5 +1,6 @@
 <template>
   <v-main app id="Ledger">
+    <Menu />
     <v-app-bar dark flat>
       <v-btn icon @click="dialogData = true">
         <v-icon large>mdi-calendar-month</v-icon>
@@ -99,11 +100,12 @@
 </template>
 
 <script>
+import Menu from '@/components/Menu.vue';
 import BottomMenu from '@/components/BottomMenu.vue';
 import { mapState } from 'vuex';
 
 export default {
-  components: { BottomMenu },
+  components: { Menu, BottomMenu },
   data() {
     return {
       dialogData: false,
