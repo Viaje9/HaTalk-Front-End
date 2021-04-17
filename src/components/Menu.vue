@@ -32,7 +32,7 @@
         </v-btn>
       </div>
       <div class="text-center pb-5">
-        <span class="white--text">Copyright © 2021 Viaje9 Design.</span>
+        <span class="white--text text-caption">Copyright © 2021 Viaje9 Design.</span>
       </div>
     </template>
     <v-dialog v-model="logoutDialog" max-width="290">

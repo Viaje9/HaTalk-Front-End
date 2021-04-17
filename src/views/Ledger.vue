@@ -7,7 +7,7 @@
         @click.stop="drawerMenu = !drawerMenu"
       ></v-app-bar-nav-icon>
       <v-spacer></v-spacer>
-      <span class="text-h5" @click="dialogData = true">{{ date }}</span>
+      <span class="text-h5" @click="dialogDate = true">{{ date }}</span>
       <v-spacer></v-spacer>
       <v-btn icon replace to="/ledger/create">
         <v-icon large>mdi-plus</v-icon>
@@ -43,46 +43,47 @@
           </tbody>
         </template>
       </v-simple-table>
+      <v-card-actions class="pa-0">
+        <div id="LedgerBottomBar">
+          <v-btn
+            dark
+            color="grey darken-2"
+            elevation="0"
+            :class="{ 'v-btn--active': status === 'expenditure' }"
+            class="LedgerBtn"
+            tile
+            @click="changeStatus('expenditure')"
+          >
+            支出
+          </v-btn>
+          <v-btn
+            dark
+            color="grey darken-2"
+            elevation="0"
+            :class="{ 'v-btn--active': status === 'income' }"
+            class="LedgerBtn"
+            tile
+            @click="changeStatus('income')"
+          >
+            收入
+          </v-btn>
+        </div>
+      </v-card-actions>
     </v-card>
-    <div id="LedgerBottomBar">
-      <v-btn
-        dark
-        color="grey darken-2"
-        elevation="0"
-        :class="{ 'v-btn--active': status === 'expenditure' }"
-        class="LedgerBtn"
-        tile
-        @click="changeStatus('expenditure')"
-      >
-        支出
+
+    <v-bottom-navigation absolute dark class="justify-space-around">
+      <v-btn elevation="0">
+        <span>統計</span>
+        <v-icon>mdi-chart-bar</v-icon>
       </v-btn>
-      <v-btn
-        dark
-        color="grey darken-2"
-        elevation="0"
-        :class="{ 'v-btn--active': status === 'income' }"
-        class="LedgerBtn"
-        tile
-        @click="changeStatus('income')"
-      >
-        收入
+      <v-btn elevation="0" replace to="/ledger/setting">
+        <span>
+          設定
+        </span>
+        <v-icon>mdi-cog</v-icon>
       </v-btn>
-      <v-btn dark color="grey darken-2" elevation="0" class="LedgerBtn" tile>
-        統計
-      </v-btn>
-      <v-btn
-        dark
-        color="grey darken-2"
-        elevation="0"
-        class="LedgerBtn"
-        tile
-        replace
-        to="/ledger/setting"
-      >
-        設定
-      </v-btn>
-    </div>
-    <v-bottom-sheet v-model="dialogData" width="384px">
+    </v-bottom-navigation>
+    <v-bottom-sheet v-model="dialogDate" width="384px">
       <v-date-picker
         @change="changeDate"
         :value="date"
@@ -91,7 +92,7 @@
         width="100%"
       ></v-date-picker>
       <v-sheet class="text-center pa-2" dark>
-        <v-btn block @click="dialogData = false">
+        <v-btn block @click="dialogDate = false">
           確定
         </v-btn>
       </v-sheet>
@@ -107,7 +108,7 @@ export default {
   components: { Menu },
   data() {
     return {
-      dialogData: false,
+      dialogDate: false,
       drawerMenu: false,
     };
   },
@@ -153,12 +154,12 @@ export default {
   .v-main__wrap {
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 56px auto 108px;
+    grid-template-rows: 56px auto 54px;
     height: 100%;
     #LedgerCotent {
       display: grid;
       grid-template-columns: 1fr;
-      grid-template-rows: 56px 1px auto;
+      grid-template-rows: 56px 1px auto 54px;
       overflow: hidden;
       .LedgerTable {
         height: 100%;
@@ -178,7 +179,6 @@ export default {
     height: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
     .LedgerBtn {
       width: 100%;
       height: 100%;

@@ -1,6 +1,6 @@
 <template>
   <v-main app id="LedgerCreate">
-    <v-card dark tile height="100%">
+    <v-card dark tile class="LedgerCreateCard" height="100%">
       <v-app-bar dark flat>
         <v-btn icon replace to="/ledger">
           <v-icon large>mdi-chevron-left</v-icon>
@@ -17,27 +17,23 @@
         <span class="text-h4">${{ price }}</span>
       </div>
       <v-divider></v-divider>
-      <v-carousel v-model="carouselIndex" hide-delimiters next-icon prev-icon height="400px">
-        <v-carousel-item v-for="(carouse ,i) in thisCategoryList" :key="i">
-          <v-btn-toggle mandatory v-model="category" tile>
-            <v-container class="pa-2">
-              <v-row class="pa-0">
-                <v-col col="12" class="text-center">
-                  <v-btn
-                    v-for="(item,index) in carouse"
-                    :value="item.name"
-                    :key="index"
-                    class="ma-1"
-                    @click="openComputer = true"
-                  >
-                    {{ item.name }}
-                  </v-btn>
-                </v-col>
-              </v-row>
-            </v-container>
-          </v-btn-toggle>
-        </v-carousel-item>
-      </v-carousel>
+      <v-btn-toggle class="categoryList" mandatory v-model="category" tile>
+        <v-container class="pa-1">
+          <v-row class="pa-0 ma-0">
+            <v-col col="12" class="ma-0">
+              <v-btn
+                v-for="(item, index) in categoryList"
+                :value="item.name"
+                :key="index"
+                class="ma-1"
+                @click="openComputer = true"
+              >
+                {{ item.name }}
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-btn-toggle>
       <v-divider></v-divider>
       <v-text-field solo dark v-model="remark" class="pa-5" label="備註" type="text"></v-text-field>
     </v-card>
@@ -76,18 +72,6 @@ export default {
       ]);
       return status.get(this.status);
     },
-    thisCategoryList() {
-      const { status, categoryList } = this;
-      return categoryList
-        .filter((e) => e.status === status).reduce((acc, curr, i) => {
-          const index = parseInt(i / 20, 10);
-          if (!acc[index]) {
-            acc[index] = [];
-          }
-          acc[index].push(curr);
-          return acc;
-        }, []);
-    },
   },
   created() {
     this.$store.dispatch('ledger/updateCategoryList');
@@ -124,4 +108,20 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss">
+#LedgerCreate {
+  height: 100vh;
+  .LedgerCreateCard {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 54px 64px 1px auto 1px 96px;
+    .categoryList {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      height: 100%;
+      overflow-y: scroll;
+    }
+  }
+}
+</style>
