@@ -1,12 +1,13 @@
 <template>
   <v-main app id="Ledger">
-    <Menu />
+    <Menu :click-menu="drawerMenu" />
     <v-app-bar dark flat>
-      <v-btn icon @click="dialogData = true">
-        <v-icon large>mdi-calendar-month</v-icon>
-      </v-btn>
+      <v-app-bar-nav-icon
+        v-if="$vuetify.breakpoint.mobile"
+        @click.stop="drawerMenu = !drawerMenu"
+      ></v-app-bar-nav-icon>
       <v-spacer></v-spacer>
-      <span class="text-h5">{{ date }}</span>
+      <span class="text-h5" @click="dialogData = true">{{ date }}</span>
       <v-spacer></v-spacer>
       <v-btn icon replace to="/ledger/create">
         <v-icon large>mdi-plus</v-icon>
@@ -95,20 +96,19 @@
         </v-btn>
       </v-sheet>
     </v-bottom-sheet>
-    <BottomMenu />
   </v-main>
 </template>
 
 <script>
 import Menu from '@/components/Menu.vue';
-import BottomMenu from '@/components/BottomMenu.vue';
 import { mapState } from 'vuex';
 
 export default {
-  components: { Menu, BottomMenu },
+  components: { Menu },
   data() {
     return {
       dialogData: false,
+      drawerMenu: false,
     };
   },
   computed: {

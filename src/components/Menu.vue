@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer v-if="!$vuetify.breakpoint.mobile" app dark :value="menuShow">
+  <v-navigation-drawer touchless v-model="menuDialog" app dark>
     <v-sheet dark class="pa-4">
       <v-avatar class="mb-4" size="64">
         <img :src="avatarImg" alt="" />
@@ -58,10 +58,16 @@
 import avatarImg from '@/assets/images/avatar.svg';
 
 export default {
+  props: {
+    clickMenu: {
+      type: Boolean,
+      default: false,
+    },
+  },
   data() {
     return {
       avatarImg,
-      drawer: true,
+      menuDialog: true,
       logoutDialog: false,
     };
   },
@@ -69,9 +75,14 @@ export default {
     name() {
       return this.$store.state.name;
     },
-    menuShow() {
-      return this.$store.state.menu;
+  },
+  watch: {
+    clickMenu() {
+      this.menuDialog = !this.menuDialog;
     },
+  },
+  created() {
+    this.menuDialog = !this.$vuetify.breakpoint.mobile;
   },
   methods: {
     logout() {

@@ -1,7 +1,11 @@
 <template>
   <v-main app>
-    <Menu />
+    <Menu :click-menu="drawerMenu" />
     <v-app-bar app dark>
+      <v-app-bar-nav-icon
+        v-if="$vuetify.breakpoint.mobile"
+        @click.stop="drawerMenu = !drawerMenu"
+      ></v-app-bar-nav-icon>
       <v-spacer></v-spacer>
       <v-btn icon @click="searchDialog = true">
         <v-icon>mdi-account-multiple-plus</v-icon>
@@ -30,7 +34,6 @@
         </template>
       </v-simple-table>
     </v-card>
-    <BottomMenu />
     <v-row justify="center">
       <SearchFriend :dialog="searchDialog" @close="searchDialog = false" />
     </v-row>
@@ -58,14 +61,15 @@
 
 <script>
 import Menu from '@/components/Menu.vue';
-import BottomMenu from '@/components/BottomMenu.vue';
 import SearchFriend from '@/components/SearchFriend.vue';
 import UserSetting from '@/components/UserSetting.vue';
 import avatarImg from '@/assets/images/avatar.svg';
 
 export default {
   components: {
-    Menu, BottomMenu, SearchFriend, UserSetting,
+    Menu,
+    SearchFriend,
+    UserSetting,
   },
   data() {
     return {
@@ -73,6 +77,7 @@ export default {
       logoutDialog: false,
       searchDialog: false,
       settingDialog: false,
+      drawerMenu: false,
     };
   },
   computed: {
@@ -101,10 +106,5 @@ export default {
 .scroll {
   height: calc(100vh - 64px);
   overflow-y: auto;
-}
-@media (max-width: 960px) {
-  .scroll {
-    height: calc(100vh - 128px);
-  }
 }
 </style>
