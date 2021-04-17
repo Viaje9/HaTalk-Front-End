@@ -19,7 +19,14 @@
         <span class="text-h4">{{ todayTotal }}</span>
       </div>
       <v-divider></v-divider>
-      <v-simple-table class="LedgerTable" fixed-header>
+      <v-simple-table
+        class="LedgerTable"
+        v-touch="{
+          left: () => swipe('Left'),
+          right: () => swipe('Right'),
+        }"
+        fixed-header
+      >
         <template #default>
           <thead>
             <tr>
@@ -144,6 +151,23 @@ export default {
     },
     changeDate(date) {
       this.$store.commit('ledger/changeDate', date);
+    },
+    swipe(direction) {
+      const {
+        date, $dayjs, $store,
+      } = this;
+      let newDate;
+      switch (direction) {
+        case 'Left':
+          newDate = $dayjs(date).subtract(1, 'day');
+          break;
+        case 'Right':
+          newDate = $dayjs(date).add(1, 'day');
+          break;
+        default:
+          break;
+      }
+      $store.commit('ledger/changeDate', newDate.format('YYYY-MM-DD'));
     },
   },
 };
