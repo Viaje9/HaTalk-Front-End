@@ -1,28 +1,29 @@
 # hatalk-front-end
 
-## Project setup
-```
+## 備註
+
+node版本 14.15.4
+
+## 運行步驟
+
+1. 安裝套件
+
+```shell
 npm install
 ```
 
-### Compiles and hot-reloads for development
+2. 複製 .env.example 檔案並命名為 .env
+
+```shell
+cp .env.example .env
 ```
+
+3. 運行開發環境
+
+```shell   
 npm run serve
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
 
 
-node版本
-14.15.4
+
