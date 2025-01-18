@@ -49,6 +49,7 @@ export default new Vuex.Store({
       return friend ? friend.name : '';
     },
     userData: (state) => !!state.account,
+    getUserName: (state) => state.name,
   },
   modules: {
     ledger,

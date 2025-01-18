@@ -6,7 +6,7 @@
       </v-card-title>
       <v-card-text class="text-center">
         <span class="text-h5">
-          {{ userName }}
+          {{ userName }} ({{ userAccount }})
         </span>
         <div class="d-flex align-center">
           <v-text-field v-model="name" label="請輸入暱稱" required></v-text-field>
@@ -40,7 +40,10 @@ export default {
   },
   computed: {
     userName() {
-      return this.$store.state.name;
+      return this.$store.getters.getUserName;
+    },
+    userAccount() {
+      return this.$store.state.account;
     },
   },
   methods: {
